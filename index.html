@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ProjectPulse - ML Projects</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a2f9828d9f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-white shadow-sm px-3 py-2 sticky-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="logo.png" alt="Logo" class="navbar-logo me-2">
+        <span class="fw-bold text-dark fs-5">Project<span class="text-danger">Pulse</span></span>
+      </a>
+      <button class="btn btn-outline-dark btn-sm" onclick="scrollToSection('contact')">Contact</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section text-center">
+    <div class="container py-5">
+      <h1 class="fw-bold display-6">Final Year ML Projects</h1>
+      <p class="text-muted mt-2">Smart, Ready-to-Use & Impressive Projects</p>
+      <button class="btn btn-primary mt-3 px-4 py-2" onclick="scrollToSection('projects')">Explore Projects</button>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="trust-section bg-light py-4 text-center">
+    <div class="container">
+      <h5 class="fw-bold">Why Trust Us?</h5>
+      <div class="row mt-3">
+        <div class="col-4">
+          <i class="fas fa-check-circle text-success fa-2x"></i>
+          <p class="small mt-2">Verified Projects</p>
+        </div>
+        <div class="col-4">
+          <i class="fas fa-star text-warning fa-2x"></i>
+          <p class="small mt-2">Rated by Students</p>
+        </div>
+        <div class="col-4">
+          <i class="fas fa-headset text-info fa-2x"></i>
+          <p class="small mt-2">Support 24x7</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-5">
+    <div class="container">
+      <h4 class="text-center fw-bold mb-4">🔥 Popular ML Projects</h4>
+      <div class="row g-4" id="projectList">
+        <!-- JavaScript will inject projects here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section bg-white py-4 text-center">
+    <div class="container">
+      <h5 class="fw-bold mb-3">Let's Connect</h5>
+      <div class="d-grid gap-2">
+        <a href="tel:+918262816029" class="btn btn-success">
+          <i class="fas fa-phone-alt me-2"></i> Call Now
+        </a>
+        <a href="https://wa.me/918262816029" class="btn btn-success">
+          <i class="fab fa-whatsapp me-2"></i> WhatsApp Us
+        </a>
+        <a href="https://instagram.com/" class="btn btn-danger">
+          <i class="fab fa-instagram me-2"></i> Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 text-center">
+    <p class="mb-1 small">© 2025 ProjectPulse. All rights reserved.</p>
+    <p class="small">Built with ❤️ for Students</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  
+    const projects = [
+      // 🎨 Image Processing & Computer Vision
+      {
+        title: "ShadowNet: Adaptive Shadow Removal from Natural Images",
+        icon: "fa-adjust",
+        desc: "Image enhancement model using deep learning to remove shadows for better scene understanding."
+      },
+      {
+        title: "NeuroScan: Brain MRI Classification using Transfer Learning",
+        icon: "fa-brain",
+        desc: "ResNet-based architecture for automated MRI image classification."
+      },
+  
+      // 🔤 Natural Language Processing
+      {
+        title: "LinguaMood: Sentiment Classification on Social Media",
+        icon: "fa-language",
+        desc: "Transformer-based sentiment analysis model tailored for tweets and short posts."
+      },
+      {
+        title: "AutoSummarizer Pro: Abstractive Text Summarization",
+        icon: "fa-align-left",
+        desc: "BERT & GPT-based summarization engine for generating human-like summaries from long texts."
+      },
+  
+      // 📊 Predictive Modeling
+      {
+        title: "AlphaTrade: Time-Series Stock Trend Prediction with LSTM",
+        icon: "fa-chart-line",
+        desc: "High-accuracy stock trend prediction model using historical time-series data."
+      },
+      {
+        title: "GradWise: Academic Success Predictor using Ensemble Learning",
+        icon: "fa-user-graduate",
+        desc: "Predicts student performance using Random Forest and boosting techniques."
+      },
+  
+      // 🔍 Object Detection / Surveillance
+      {
+        title: "Intrudex: Smart Surveillance with YOLOv5",
+        icon: "fa-video",
+        desc: "Real-time intruder detection and tracking using YOLOv5 and OpenCV."
+      },
+  
+      // 🎙️ Audio & Speech
+      {
+        title: "SpeechMorph: Accent Detection and Classification",
+        icon: "fa-microphone-alt",
+        desc: "Deep audio classifier trained to identify English speaker accents from audio input."
+      },
+  
+      // 🧠 General Deep Learning Application
+      {
+        title: "PoseNetX: Human Pose Estimation for Fitness Tracking",
+        icon: "fa-running",
+        desc: "Real-time body keypoint detection system for exercise form correction and tracking."
+      }
+    ];
+  
+    const projectList = document.getElementById('projectList');
+  
+    projects.forEach(proj => {
+      const card = document.createElement('div');
+      card.className = 'col-12';
+      card.innerHTML = `
+        <div class="card project-card shadow-sm p-3 mb-3">
+          <div class="d-flex align-items-start">
+            <i class="fas ${proj.icon} fa-lg text-primary me-3 mt-1"></i>
+            <div>
+              <h6 class="mb-1 fw-bold">${proj.title}</h6>
+              <small class="text-muted">${proj.desc}</small>
+            </div>
+          </div>
+          <button class="btn btn-outline-primary btn-sm mt-3 w-100" onclick="alert('More details coming soon!')">More Info</button>
+        </div>
+      `;
+      projectList.appendChild(card);
+    });
+  </script>
+  
+  
+  
+
+</body>
+</html>
