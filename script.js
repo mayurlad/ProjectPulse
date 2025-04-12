@@ -1,3 +1,4 @@
+
 // Smooth scroll for navbar links
 document.querySelectorAll('a.nav-link').forEach(link => {
   link.addEventListener('click', function(e) {
@@ -9,30 +10,8 @@ document.querySelectorAll('a.nav-link').forEach(link => {
   });
 });
 
-// Example popup alert on 'Get Started' button click
-document.querySelector('.btn.btn-danger')?.addEventListener('click', () => {
-  alert("Let's get started with ProjectPulse! 🚀");
-});
-
-// Optional: Hover effect to scale cards
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    card.style.transform = 'scale(1.03)';
-    card.style.transition = 'transform 0.2s';
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'scale(1)';
-  });
-});
-
-// Scroll to section (used in specific functions)
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
-
 // List of projects
 const projects = [
-  // 🎨 Image Processing & Computer Vision
   {
     title: "ShadowNet: Adaptive Shadow Removal from Natural Images",
     icon: "fa-adjust",
@@ -43,8 +22,6 @@ const projects = [
     icon: "fa-brain",
     desc: "ResNet-based architecture for automated MRI image classification."
   },
-
-  // 🔤 Natural Language Processing
   {
     title: "LinguaMood: Sentiment Classification on Social Media",
     icon: "fa-language",
@@ -55,8 +32,6 @@ const projects = [
     icon: "fa-align-left",
     desc: "BERT & GPT-based summarization engine for generating human-like summaries from long texts."
   },
-
-  // 📊 Predictive Modeling
   {
     title: "AlphaTrade: Time-Series Stock Trend Prediction with LSTM",
     icon: "fa-chart-line",
@@ -67,22 +42,16 @@ const projects = [
     icon: "fa-user-graduate",
     desc: "Predicts student performance using Random Forest and boosting techniques."
   },
-
-  // 🔍 Object Detection / Surveillance
   {
     title: "Intrudex: Smart Surveillance with YOLOv5",
     icon: "fa-video",
     desc: "Real-time intruder detection and tracking using YOLOv5 and OpenCV."
   },
-
-  // 🎙️ Audio & Speech
   {
     title: "SpeechMorph: Accent Detection and Classification",
     icon: "fa-microphone-alt",
     desc: "Deep audio classifier trained to identify English speaker accents from audio input."
   },
-
-  // 🧠 General Deep Learning Application
   {
     title: "PoseNetX: Human Pose Estimation for Fitness Tracking",
     icon: "fa-running",
@@ -96,7 +65,7 @@ const projectList = document.getElementById('projectList');
 if (projectList) {
   projects.forEach(proj => {
     const card = document.createElement('div');
-    card.className = 'col-12';
+    card.className = 'col-12 col-sm-6 col-md-4';  // Responsive grid for cards
     card.innerHTML = `
       <div class="card project-card shadow-sm p-3 mb-3">
         <div class="d-flex align-items-start">
@@ -112,6 +81,7 @@ if (projectList) {
     projectList.appendChild(card);
   });
 }
+
 const counters = document.querySelectorAll('.counter');
 const speed = 300; // lower is faster
 
@@ -125,9 +95,9 @@ counters.forEach(counter => {
       counter.innerText = count + increment;
       setTimeout(updateCount, 10);
     } else {
-      counter.innerText = target ;
+      counter.innerText = target  ;
     }
   };
-
+  
   updateCount();
 });
