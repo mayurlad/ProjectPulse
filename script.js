@@ -101,3 +101,31 @@ counters.forEach(counter => {
   
   updateCount();
 });
+
+// Function to scroll to a specific section
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    window.scrollTo({
+      top: element.offsetTop - 60, // offset for navbar height
+      behavior: 'smooth' // smooth scroll effect
+    });
+  }
+}
+
+// Optional: Counter animation for Trust Section
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count < target) {
+        count++;
+        counter.textContent = count;
+      } else {
+        clearInterval(interval);
+      }
+    }, 10);
+  });
+});
