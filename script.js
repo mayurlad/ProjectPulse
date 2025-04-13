@@ -1,10 +1,13 @@
 // Smooth scroll for navbar links
-function scrollToSection(id) {
-  const section = document.getElementById(id);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
+document.querySelectorAll('a.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const section = document.querySelector(this.getAttribute('href'));
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
 
 // List of projects
 const projects = [
@@ -55,51 +58,84 @@ const projects = [
   }
 ];
 
-// Dynamically populate the project list
-window.addEventListener('DOMContentLoaded', () => {
-  const projectList = document.getElementById('projectList');
-  if (projectList) {
-    projects.forEach(proj => {
-      const card = document.createElement('div');
-      card.className = 'col-12 col-sm-6 col-md-4';
-      card.innerHTML = `
-        <div class="card project-card shadow-sm p-3 mb-3">
-          <div class="d-flex align-items-start">
-            <i class="fas ${proj.icon} fa-lg text-primary me-3 mt-1"></i>
-            <div>
-              <h6 class="mb-1 fw-bold">${proj.title}</h6>
-              <small class="text-muted">${proj.desc}</small>
-            </div>
+// Populate project list dynamically
+const projectList = document.getElementById('projectList');
+if (projectList) {
+  projects.forEach(proj => {
+    const card = document.createElement('div');
+    card.className = 'col-12 col-sm-6 col-md-4';  // Responsive grid for cards
+    card.innerHTML = `
+      <div class="card project-card shadow-sm p-3 mb-3" tabindex="0" role="button">
+        <div class="d-flex align-items-start">
+          <i class="fas ${proj.icon} fa-lg text-primary me-3 mt-1" aria-hidden="true"></i>
+          <div>
+            <h6 class="mb-1 fw-bold">${proj.title}</h6>
+            <small class="text-muted">${proj.desc}</small>
           </div>
-          <button class="btn btn-outline-primary btn-sm mt-3 w-100" onclick="alert('More details coming soon!')">More Info</button>
         </div>
-      `;
-      projectList.appendChild(card);
-    });
-  }
-
-  // Start counter animation
-  animateCounters();
-});
-
-// Counter animation
-function animateCounters() {
-  const counters = document.querySelectorAll('.counter');
-  const speed = 200;
-
-  counters.forEach(counter => {
-    const updateCount = () => {
-      const target = +counter.getAttribute('data-target');
-      const count = +counter.innerText;
-      const increment = target / speed;
-
-      if (count < target) {
-        counter.innerText = Math.ceil(count + increment);
-        setTimeout(updateCount, 15);
-      } else {
-        counter.innerText = target;
-      }
-    };
-    updateCount();
+        <button class="btn btn-outline-primary btn-sm mt-3 w-100" onclick="alert('More details coming soon!')" aria-label="More project details">More Info</button>
+      </div>
+    `;
+    projectList.appendChild(card);
   });
 }
+
+// Optimized Counter animation with requestAnimationFrame for smooth performance
+const counters = document.querySelectorAll('.counter');
+const speed = 300; // lower is faster
+
+counters.forEach(counter => {
+  const updateCount = () => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const increment = Math.ceil(target / speed);
+
+    if (count < target) {
+      counter.innerText = count + increment;
+      requestAnimationFrame(updateCount);
+    } else {
+      counter.innerText = target;
+    }
+  };
+
+  updateCount();
+});
+
+// Function to scroll to a specific section (modular)
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    window.scrollTo({
+      top: element.offsetTop - 60, // offset for navbar height
+      behavior: 'smooth' // smooth scroll effect
+    });
+  }
+}
+
+// Optional: Counter animation for Trust Section
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count < target) {
+        count++;
+        counter.textContent = count;
+      } else {
+        clearInterval(interval);
+      }
+    }, 10);
+  });
+});
+
+// Add subtle hover effects on project cards
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'scale(1.05)';
+    card.style.transition = 'transform 0.3s ease';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'scale(1)';
+  });
+});
