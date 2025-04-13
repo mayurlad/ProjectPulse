@@ -59,3 +59,24 @@ body {
   color: #0d6efd;
   transition: 0.5s ease-out;
 }
+.plans-section .card {
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.plans-section .card h6 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.plans-section .card ul li {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 576px) {
+  .plans-section .card {
+    margin: 0 auto 1rem;
+  }
+}
